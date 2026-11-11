@@ -1,4 +1,0 @@
-(fp_lib_table
-  (version 7)
-  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/../kicad/mcs.pretty")(options "")(descr "Matter contact sensor project footprints"))
-)

@@ -4,14 +4,14 @@ Generate tuning variants of the TI AN043 (SWRA117D) meandered inverted-F antenna
 
 Source footprints: KiCad library RF_Antenna:Texas_SWRA117D_2.4GHz_Left / _Right (mirror image)
 (https://gitlab.com/kicad/libraries/kicad-footprints, CC-BY-SA 4.0 with the KiCad library
-exception), copied unmodified to hardware/antenna/. The PCB uses the _Right version (feed at the
-side-A edge, see docs/06_pcb_layout.md).
+exception), copied unmodified to hardware/chip/antenna/. The PCB uses the _Right version (feed at the
+side-A edge, see docs/chip/06_pcb_layout.md).
 
 Only the open end of the last meander leg (dimension L1 = 3.94 mm in SWRA117D) is shortened.
 A plastic housing (er ~2.5-3.5 at 1-2 mm distance) lowers the resonance frequency; a slightly
 shorter radiating arm moves it back up. All variants are placed side by side on the EVT panel
 and the one whose S11 minimum falls at 2.44 GHz INSIDE THE HOUSING is kept
-(docs/04_antenna_rf.md, procedure step 4).
+(docs/chip/04_antenna_rf.md, procedure step 4).
 
 Usage: python3 tools/gen_antenna_variants.py
 """
@@ -19,7 +19,7 @@ import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SRC = ROOT / "hardware" / "antenna" / "Texas_SWRA117D_2.4GHz_Left.kicad_mod"
+SRC = ROOT / "hardware" / "chip" / "antenna" / "Texas_SWRA117D_2.4GHz_Left.kicad_mod"
 KICAD_RIGHT = pathlib.Path("/usr/share/kicad/footprints/RF_Antenna.pretty/Texas_SWRA117D_2.4GHz_Right.kicad_mod")
 L1_END_Y = -0.71           # y of the open end of the last leg in the source footprint
 L1_NOMINAL = 3.94

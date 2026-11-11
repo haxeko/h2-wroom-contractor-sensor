@@ -1,6 +1,6 @@
 #!/usr/bin/python3.12
 """
-Build hardware/kicad/matter_contact_sensor.kicad_pcb (rev A, 36 x 18 mm, 4 layers, 1.0 mm) with the
+Build hardware/chip/matter_contact_sensor.kicad_pcb (rev A, 36 x 18 mm, 4 layers, 1.0 mm) with the
 KiCad 10 pcbnew Python API.
 
 Run with the Python that ships the pcbnew module (Ubuntu KiCad 10 PPA: /usr/bin/python3.12):
@@ -12,7 +12,7 @@ Flow (everything is deterministic, the board can be regenerated at any time):
   1. kicad-cli exports the netlist of the schematic (generated from tools/design_data.py), so the
      board is built from the schematic itself -> DRC "schematic parity" holds by construction.
   2. Net classes / design rules are written into the .kicad_pro, custom rules into the .kicad_dru.
-  3. Footprints are loaded from the KiCad libraries + hardware/kicad/mcs.pretty and placed from the
+  3. Footprints are loaded from the KiCad libraries + hardware/lib/mcs.pretty and placed from the
      PLACEMENT table below (coordinates in mm from the top-left board corner, x = 0 at the antenna
      end, y = 18 = edge "A" facing the magnet).
   4. The RF chain is drawn explicitly (GCPW 0.32 mm), every other net is routed by
@@ -40,13 +40,13 @@ from pcb_router import Grid, Rule, _disk, path_to_segments  # noqa: E402
 from sexp import Sym, find, find_all, loads  # noqa: E402
 
 ROOT = HERE.parents[1]
-KDIR = ROOT / "hardware" / "kicad"
+KDIR = ROOT / "hardware" / "chip"
 PROJECT = "matter_contact_sensor"
 SCH = KDIR / f"{PROJECT}.kicad_sch"
 PCB = KDIR / f"{PROJECT}.kicad_pcb"
 PRO = KDIR / f"{PROJECT}.kicad_pro"
 DRU = KDIR / f"{PROJECT}.kicad_dru"
-FP_DIRS = {"mcs": KDIR / "mcs.pretty"}
+FP_DIRS = {"mcs": ROOT / "hardware" / "lib" / "mcs.pretty"}
 KICAD_FP = pathlib.Path("/usr/share/kicad/footprints")
 
 OX, OY = 100.0, 100.0            # page position of the board corner (x=0, y=0)

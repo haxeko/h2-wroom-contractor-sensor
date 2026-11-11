@@ -1,6 +1,6 @@
 /*
  * Matter over Thread contact sensor - ESP32-H2 + DRV5032FA Hall switch + CR123A
- * (bare-chip board hardware/kicad, or ESP32-H2-WROOM-02C module board hardware/kicad_wroom).
+ * (bare-chip board hardware/chip, or ESP32-H2-WROOM-02C module board hardware/wroom).
  *
  * Toolchain verified with: ESP-IDF v5.5.5 + esp-matter release/v1.6.
  *

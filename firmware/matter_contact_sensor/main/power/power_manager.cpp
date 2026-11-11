@@ -28,7 +28,7 @@
 
 static const char *TAG = "power";
 
-/* Pins that are not connected on PCB rev A (see docs/05_schematic.md, GPIO table).
+/* Pins that are not connected on PCB rev A (see docs/chip/05_schematic.md, GPIO table).
  * Floating inputs waste current; gpio_reset_pin() disables the input buffer and enables the
  * weak pull-up, as recommended by the ESP32-H2 hardware design guidelines. */
 static const gpio_num_t kUnusedPins[] = {

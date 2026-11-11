@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Study: can a CR2450 coin cell power the ESP32-H2-WROOM-02C board? (docs/12 section 8)
+Study: can a CR2450 coin cell power the ESP32-H2-WROOM-02C board? (docs/wroom/12 section 8)
 
 Answer: only for the first ~250 mAh (40 %) of the cell, whatever the capacitors - which is why both
 boards use a CR123A. The script is kept to reproduce the numbers.

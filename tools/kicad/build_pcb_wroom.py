@@ -1,8 +1,8 @@
 #!/usr/bin/python3.12
 """
-Build hardware/kicad_wroom/matter_contact_sensor_wroom.kicad_pcb: module variant of the contact sensor
+Build hardware/wroom/matter_contact_sensor_wroom.kicad_pcb: module variant of the contact sensor
 (ESP32-H2-WROOM-02C), 32 x 20 mm, 2 LAYERS, 1.0 mm. Battery: CR123A off the PCB, two wires soldered to
-J1 at the far end, exactly as on the bare-chip board (no bulk capacitor needed, docs/12 section 7).
+J1 at the far end, exactly as on the bare-chip board (no bulk capacitor needed, docs/wroom/12 section 7).
 
 Re-uses tools/kicad/build_pcb.py (netlist import, project settings, placement legaliser, maze router,
 cleanup, DRC); only the board-specific parts are defined here:
@@ -34,13 +34,13 @@ import design_data_wroom as W  # noqa: E402
 from pcb_router import Rule, _disk  # noqa: E402
 
 ROOT = HERE.parents[1]
-B.KDIR = ROOT / "hardware" / "kicad_wroom"
+B.KDIR = ROOT / "hardware" / "wroom"
 B.PROJECT = "matter_contact_sensor_wroom"
 B.SCH = B.KDIR / f"{B.PROJECT}.kicad_sch"
 B.PCB = B.KDIR / f"{B.PROJECT}.kicad_pcb"
 B.PRO = B.KDIR / f"{B.PROJECT}.kicad_pro"
 B.DRU = B.KDIR / f"{B.PROJECT}.kicad_dru"
-B.FP_DIRS = {"mcs": ROOT / "hardware" / "kicad" / "mcs.pretty"}
+B.FP_DIRS = {"mcs": ROOT / "hardware" / "lib" / "mcs.pretty"}
 B.PARTS = W.PARTS
 
 BW, BH = 32.0, 20.0

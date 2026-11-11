@@ -1,4 +1,0 @@
-(sym_lib_table
-  (version 7)
-  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/../kicad/mcs.kicad_sym")(options "")(descr "Matter contact sensor project symbols"))
-)

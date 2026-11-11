@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Generate hardware/kicad/matter_contact_sensor.kicad_sch from tools/design_data.py, or with
---variant wroom hardware/kicad_wroom/matter_contact_sensor_wroom.kicad_sch from tools/design_data_wroom.py
+Generate hardware/chip/matter_contact_sensor.kicad_sch from tools/design_data.py, or with
+--variant wroom hardware/wroom/matter_contact_sensor_wroom.kicad_sch from tools/design_data_wroom.py
 (ESP32-H2-WROOM-02C module version).
 
 Style: every symbol pin gets a short wire stub and a local net label (label-based schematic,
@@ -25,9 +25,9 @@ from sexp import Sym, dumps, find_all  # noqa: E402
 from symlib import get_symbol, pins  # noqa: E402
 
 ROOT = HERE.parents[1]
-KDIR = ROOT / "hardware" / ("kicad_wroom" if VARIANT == "wroom" else "kicad")
+KDIR = ROOT / "hardware" / ("wroom" if VARIANT == "wroom" else "chip")
 PROJECT = "matter_contact_sensor_wroom" if VARIANT == "wroom" else "matter_contact_sensor"
-PROJECT_LIBS = {"mcs": str(ROOT / "hardware" / "kicad" / "mcs.kicad_sym")}
+PROJECT_LIBS = {"mcs": str(ROOT / "hardware" / "lib" / "mcs.kicad_sym")}
 NS = uuid.UUID("6f1c2a4e-9d3b-4c55-8f0e-2b7a1d9c3e10")
 ROOT_UUID = str(uuid.uuid5(NS, "root-sheet"))
 STUB = 2.54
@@ -270,7 +270,7 @@ def build():
            [Sym("title_block"), [Sym("title"), SCH_TITLE if VARIANT == "wroom" else "Matter Contact Sensor - ESP32-H2 / Hall / CR123A"],
             [Sym("date"), "2026-11-06"], [Sym("rev"), "A"], [Sym("company"), "matter-thread-contractor"],
             [Sym("comment"), 1, f"Schematic generated from tools/{'design_data_wroom' if VARIANT == 'wroom' else 'design_data'}.py (single source of truth)"],
-            [Sym("comment"), 2, "See docs/05_schematic.md for the design description and GPIO table"]],
+            [Sym("comment"), 2, "See docs/chip/05_schematic.md for the design description and GPIO table"]],
            lib_symbols]
     sch += items + instances
     sch.append([Sym("sheet_instances"), [Sym("path"), "/", [Sym("page"), "1"]]])

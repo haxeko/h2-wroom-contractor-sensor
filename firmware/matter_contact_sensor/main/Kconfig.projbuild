@@ -1,6 +1,6 @@
 menu "Contact Sensor (board) configuration"
 
-    comment "Pin map defaults = custom PCB rev A (docs/05_schematic.md)"
+    comment "Pin map defaults = custom PCB rev A (docs/chip/05_schematic.md)"
 
     config CS_HALL_GPIO
         int "Hall sensor output GPIO"

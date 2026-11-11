@@ -1,7 +1,7 @@
 # matter_contact_sensor – firmware ESP32-H2 (Matter over Thread, ICD)
 
-Firmware cho cảm biến cửa: **ESP32-H2FH4S + DRV5032FA (Hall) + TPS63900 + CR123A** (bản chip rời `hardware/kicad`) và bản module ESP32-H2-WROOM-02C (`hardware/kicad_wroom`, cùng pin CR123A, cùng firmware).
-Thiết kế chi tiết: [`../../docs/08_firmware.md`](../../docs/08_firmware.md).
+Firmware cho cảm biến cửa: **ESP32-H2FH4S + DRV5032FA (Hall) + TPS63900 + CR123A** (bản chip rời `hardware/chip`) và bản module ESP32-H2-WROOM-02C (`hardware/wroom`, cùng pin CR123A, cùng firmware).
+Thiết kế chi tiết: [`../../docs/common/08_firmware.md`](../../docs/common/08_firmware.md).
 
 ## Phiên bản SDK đã kiểm chứng
 
@@ -48,7 +48,7 @@ idf.py -p /dev/ttyUSB0 flash monitor
 idf.py -B build_debug -D SDKCONFIG=build_debug/sdkconfig \
        -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.defaults.debug" set-target esp32h2 build
 
-# Bản module ESP32-H2-WROOM-02C (hardware/kicad_wroom): dùng đúng bản build mặc định ở trên
+# Bản module ESP32-H2-WROOM-02C (hardware/wroom): dùng đúng bản build mặc định ở trên
 ```
 
 Vào chế độ nạp trên PCB: giữ nút (GPIO9 = BOOT) hoặc kéo TP5 xuống GND trong lúc reset (TP4) / cấp nguồn. GPIO8 đã có điện trở kéo lên R11 (bắt buộc cho Joint Download Boot).
@@ -71,7 +71,7 @@ Với `CONFIG_PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP=y`, Hall và nút **phải
 | Thao tác | Kết quả |
 |---|---|
 | Cấp pin lần đầu | quảng bá BLE (tối đa 15 phút), LED nháy 30 ms/2 s |
-| Hết 15 phút mà chưa commission | sau 60 s: **Deep-sleep** (~7 µA). Nhấn nút để thức dậy và mở cửa sổ mới (docs/08 §3.6) |
+| Hết 15 phút mà chưa commission | sau 60 s: **Deep-sleep** (~7 µA). Nhấn nút để thức dậy và mở cửa sổ mới (docs/common/08 §3.6) |
 | Nhấn ngắn (chưa commission, còn thức) | mở lại cửa sổ BLE 300 s |
 | Pin quá yếu lúc khởi động (< 2.2 V có tải, hoặc 3 lần brownout liên tiếp) | Deep-sleep 1 giờ rồi thử lại; nút đánh thức sớm |
 | Nhấn ngắn (đã commission) | ICD Active mode, đo pin, kiểm tra lại Hall, LED nháy 1 lần |

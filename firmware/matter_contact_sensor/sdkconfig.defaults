@@ -3,7 +3,7 @@
 #  ESP-IDF v5.5.5 + esp-matter release/v1.6
 #  Base: esp-matter/examples/icd_app/sdkconfig.defaults (Espressif official ICD example)
 #  Every option below exists in these SDK versions (checked against the Kconfig sources).
-#  Explanations: docs/08_firmware.md, section "sdkconfig".
+#  Explanations: docs/common/08_firmware.md, section "sdkconfig".
 # =============================================================================
 
 # ----------------------------------------------------------------- Target / flash

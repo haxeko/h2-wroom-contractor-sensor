@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Export the manufacturing / review outputs of hardware/kicad/matter_contact_sensor.* with kicad-cli
-(KiCad 10). Everything lands in hardware/kicad/fab/:
+Export the manufacturing / review outputs of hardware/chip/matter_contact_sensor.* with kicad-cli
+(KiCad 10). Everything lands in hardware/chip/fab/:
 
   gerber/         Gerber X2 (4 copper layers, masks, paste, silk, Edge.Cuts) + Excellon drill (PTH/NPTH)
                   + drill maps + Gerber job file
@@ -22,7 +22,7 @@ Gerber, drill and pick & place coordinates use the drill/place origin set by bui
 lower-left board corner (X to the right, Y up).
 
 Usage: python3 tools/kicad/export_fab.py                  (after /usr/bin/python3.12 tools/kicad/build_pcb.py)
-       python3 tools/kicad/export_fab.py --variant wroom  (module variant, hardware/kicad_wroom/fab/)
+       python3 tools/kicad/export_fab.py --variant wroom  (module variant, hardware/wroom/fab/)
 """
 import csv
 import pathlib
@@ -34,12 +34,12 @@ import zipfile
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 WROOM = "--variant" in sys.argv and sys.argv[sys.argv.index("--variant") + 1] == "wroom"
 NAME = "matter_contact_sensor_wroom" if WROOM else "matter_contact_sensor"
-KDIR = ROOT / "hardware" / ("kicad_wroom" if WROOM else "kicad")
+KDIR = ROOT / "hardware" / ("wroom" if WROOM else "chip")
 PCB = KDIR / f"{NAME}.kicad_pcb"
 SCH = KDIR / f"{NAME}.kicad_sch"
 OUT = KDIR / "fab"
 
-# LCSC numbers already checked during the BOM research (docs/07) or used for the same part in the
+# LCSC numbers already checked during the BOM research (docs/chip/07) or used for the same part in the
 # BOM of the CR2032 Matter button; every other line is filled in by the assembler from the MPN
 LCSC = {"ECS-320-10-37B2-CKY-TR": "C6190606", "GRM188R60J226MEA0D": "C77042", "B3U-1000P": "C231329",
         "AO3401A": "C15127", "TPS63900DSKR": "C1518762"}

@@ -42,7 +42,7 @@ static bool s_has_last;
  * Unloaded voltage -> remaining capacity for a Li-MnO2 cell (CR123A) at ~20 degC and uA..mA loads.
  * Li-MnO2 has a very flat plateau, so the voltage only gives a coarse estimate; the table is
  * a STARTING POINT and must be re-fitted from discharge tests of the chosen battery brand
- * (docs/09_battery_life.md, test B-03).
+ * (docs/common/09_battery_life.md, test B-03).
  */
 struct curve_point_t {
     uint16_t mv;

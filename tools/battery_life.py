@@ -4,12 +4,12 @@ Battery-life estimator - Matter-over-Thread contact sensor
 ESP32-H2 (SIT ICD, light sleep) + DRV5032FA + TPS63900 buck-boost (3.2 V) + CR123A.
 
 Every input is a named parameter with its source. Values marked "ESTIMATE" must be replaced
-by measurements (docs/09_battery_life.md, section "Đo dòng thực tế").
+by measurements (docs/common/09_battery_life.md, section "Đo dòng thực tế").
 
 Usage:
     python3 tools/battery_life.py                # default tables (markdown)
     python3 tools/battery_life.py --tx-dbm 0 --slow-poll-s 15 --subscribers 3
-    # CR2450 coin cell, NOT used by any board (docs/12 section 8)
+    # CR2450 coin cell, NOT used by any board (docs/wroom/12 section 8)
     python3 tools/battery_life.py --capacity-mah 600 620 --usable-fraction 0.40 --tx-dbm 0
     # (0.40: the cell's internal resistance passes 20 Ohm at ~250 mAh, tools/coin_cell_buffer.py)
 """

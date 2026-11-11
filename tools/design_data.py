@@ -3,9 +3,9 @@ Master design data of the Matter contact sensor rev A (single source of truth).
 Battery off the PCB (wired to J1), PCB 36 x 18 mm.
 
 Used by:
-  tools/netlist.py              -> hardware/netlist/netlist.csv + simple ERC checks
-  tools/kicad/gen_schematic.py  -> hardware/kicad/matter_contact_sensor.kicad_sch
-  tools/kicad/build_pcb.py      -> hardware/kicad/matter_contact_sensor.kicad_pcb (through the
+  tools/netlist.py              -> hardware/chip/netlist.csv + simple ERC checks
+  tools/kicad/gen_schematic.py  -> hardware/chip/matter_contact_sensor.kicad_sch
+  tools/kicad/build_pcb.py      -> hardware/chip/matter_contact_sensor.kicad_pcb (through the
                                    netlist exported by KiCad from the schematic)
 
 Pin keys are the SYMBOL pin numbers, which equal the FOOTPRINT pad numbers.

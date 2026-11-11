@@ -10,7 +10,7 @@ the firmware runs unchanged:
 Supply and battery: identical to the bare-chip board - CR123A off the PCB, two wires soldered to J1,
 P-MOSFET reverse-polarity protection, TPS63900 at 3.2 V without an input current limit. A CR123A has
 well under 1 Ohm of internal resistance, so no bulk capacitor is needed (a CR2450 coin cell was tried
-and dropped: only ~40 % of its capacity is usable with this radio, docs/12 section 7).
+and dropped: only ~40 % of its capacity is usable with this radio, docs/wroom/12 section 7).
 
 Used by tools/kicad/gen_schematic.py --variant wroom and tools/kicad/build_pcb_wroom.py.
 Pin keys are module pin numbers (= footprint pad numbers, datasheet table 2).

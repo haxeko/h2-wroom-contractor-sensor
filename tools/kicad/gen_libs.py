@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate the project libraries of hardware/kicad/:
+Generate the project libraries of hardware/chip/:
   mcs.kicad_sym : ESP32-H2FH4S, ESP32-H2-WROOM-02C, DRV5032FAxDBZ, DMG2305UX, MS-156C3
   mcs.pretty/   : MIFA antenna Left/Right (nominal + L1 tuning variants), battery wire pads, CR2450 edge tab pads, ESP32-H2-WROOM-02C, tooling hole
   sym-lib-table, fp-lib-table
@@ -15,8 +15,8 @@ from sexp import Sym, dumps, find, find_all  # noqa: E402
 from symlib import get_symbol  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-KDIR = ROOT / "hardware" / "kicad"
-ANT_SRC = ROOT / "hardware" / "antenna"
+KDIR = ROOT / "hardware" / "lib"            # shared project library (both boards)
+ANT_SRC = ROOT / "hardware" / "chip" / "antenna"
 NICK = "mcs"
 
 F = [Sym("effects"), [Sym("font"), [Sym("size"), 1.27, 1.27]]]
@@ -380,21 +380,16 @@ def write_footprint_lib():
 
 
 def write_tables():
-    # module variant (hardware/kicad_wroom) uses the same project libraries
-    wdir = ROOT / "hardware" / "kicad_wroom"
-    wdir.mkdir(parents=True, exist_ok=True)
-    (wdir / "sym-lib-table").write_text(
-        '(sym_lib_table\n  (version 7)\n  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/../kicad/mcs.kicad_sym")'
-        '(options "")(descr "Matter contact sensor project symbols"))\n)\n')
-    (wdir / "fp-lib-table").write_text(
-        '(fp_lib_table\n  (version 7)\n  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/../kicad/mcs.pretty")'
-        '(options "")(descr "Matter contact sensor project footprints"))\n)\n')
-    (KDIR / "sym-lib-table").write_text(
-        '(sym_lib_table\n  (version 7)\n  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/mcs.kicad_sym")'
-        '(options "")(descr "Matter contact sensor project symbols"))\n)\n')
-    (KDIR / "fp-lib-table").write_text(
-        '(fp_lib_table\n  (version 7)\n  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/mcs.pretty")'
-        '(options "")(descr "Matter contact sensor project footprints"))\n)\n')
+    """Both board projects (hardware/chip, hardware/wroom) use the shared library in hardware/lib."""
+    for board in ("chip", "wroom"):
+        d = ROOT / "hardware" / board
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "sym-lib-table").write_text(
+            '(sym_lib_table\n  (version 7)\n  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/../lib/mcs.kicad_sym")'
+            '(options "")(descr "Matter contact sensor project symbols"))\n)\n')
+        (d / "fp-lib-table").write_text(
+            '(fp_lib_table\n  (version 7)\n  (lib (name "mcs")(type "KiCad")(uri "${KIPRJMOD}/../lib/mcs.pretty")'
+            '(options "")(descr "Matter contact sensor project footprints"))\n)\n')
 
 
 def main():
