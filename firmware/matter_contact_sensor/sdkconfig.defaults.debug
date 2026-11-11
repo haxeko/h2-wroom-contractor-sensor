@@ -1,0 +1,9 @@
+# =============================================================================
+#  Development overlay: verbose logs on UART0 (TP7/TP8, 115200 baud).
+#  Build:  idf.py -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.defaults.debug" build
+#  NOT for battery-life measurements: the UART traffic keeps the CPU awake.
+# =============================================================================
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+CONFIG_BOOTLOADER_LOG_LEVEL_INFO=y
+CONFIG_CHIP_LOG_DEFAULT_LEVEL_PROGRESS=y
+CONFIG_OPENTHREAD_LOG_LEVEL_NOTE=y

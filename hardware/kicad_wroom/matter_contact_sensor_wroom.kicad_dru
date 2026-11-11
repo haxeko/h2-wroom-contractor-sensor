@@ -1,0 +1,2 @@
+(version 1)
+# Matter contact sensor, ESP32-H2-WROOM-02C variant: board rules only (no RF on the base board)

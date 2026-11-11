@@ -1,0 +1,7 @@
+# KiCad local / generated-on-open files
+*.kicad_prl
+*-backups/
+fp-info-cache
+_autosave-*
+*.lck
+~*.lck

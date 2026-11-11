@@ -1,0 +1,12 @@
+# ESP32-H2FH4S - 4 MB in-package flash - Matter with OTA (two application slots)
+# Same layout as esp-matter/examples/icd_app (Espressif reference for ESP32-H2 Matter ICD).
+# Firmware partition offsets must be 64 KB aligned; 0x0..0xC000 = bootloader + partition table.
+# Name,           Type, SubType,  Offset,    Size,      Flags
+esp_secure_cert,  0x3F, ,         0xd000,    0x2000,    encrypted
+nvs,              data, nvs,      0x10000,   0xC000,
+nvs_keys,         data, nvs_keys, ,          0x1000,    encrypted
+otadata,          data, ota,      ,          0x2000
+phy_init,         data, phy,      ,          0x1000,
+ota_0,            app,  ota_0,    0x20000,   0x1E0000,
+ota_1,            app,  ota_1,    0x200000,  0x1E0000,
+fctry,            data, nvs,      0x3E0000,  0x6000

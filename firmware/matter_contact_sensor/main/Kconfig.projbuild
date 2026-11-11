@@ -1,0 +1,175 @@
+menu "Contact Sensor (board) configuration"
+
+    comment "Pin map defaults = custom PCB rev A (docs/05_schematic.md)"
+
+    config CS_HALL_GPIO
+        int "Hall sensor output GPIO"
+        range 7 14 if PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP && IDF_TARGET_ESP32H2
+        range 0 27
+        default 10
+        help
+            GPIO connected to the DRV5032FA output (push-pull, LOW when a magnet is present).
+            When CONFIG_PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP is enabled the digital GPIO
+            wake-up is not available on ESP32-H2; only the LP IOs GPIO7..GPIO14 can wake the
+            chip (EXT1). GPIO13/14 are reserved for the optional 32.768 kHz crystal.
+
+    config CS_HALL_ACTIVE_LEVEL
+        int "Hall output level when the magnet is present (door CLOSED)"
+        range 0 1
+        default 0
+
+    config CS_HALL_PULLUP
+        bool "Enable internal pull-up on the Hall input (only for open-drain sensors)"
+        default n
+        help
+            Keep this disabled for push-pull sensors (DRV5032FA/FB): a pull-up fighting a
+            push-pull LOW output would waste ~70 uA while the door is closed.
+            Enable only for open-drain variants (DRV5032AJ/FC) if no external pull-up is fitted.
+
+    config CS_HALL_DEBOUNCE_MS
+        int "Hall debounce / confirmation time (ms)"
+        range 20 2000
+        default 300
+        help
+            The level must be identical at the start and the end of this window.
+            DRV5032FA samples the field every 27..75 ms (20 Hz version): 300 ms covers at least
+            four sampling periods and also filters door rattle. Keep >= 300 ms if the 5 Hz
+            DRV5032FB (117..286 ms) is fitted instead.
+
+    config CS_BUTTON_GPIO
+        int "Commissioning / reset button GPIO"
+        range 7 14 if PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP && IDF_TARGET_ESP32H2
+        range 0 27
+        default 9
+        help
+            Active LOW. GPIO9 is also the BOOT strapping pin (LOW at reset = download mode),
+            which is convenient for production flashing.
+
+    config CS_BUTTON_INTERNAL_PULLUP
+        bool "Enable internal pull-up on the button GPIO"
+        default y
+
+    config CS_BUTTON_LONG_PRESS_MS
+        int "Long press: start factory-reset warning (ms)"
+        default 5000
+
+    config CS_BUTTON_FACTORY_RESET_MS
+        int "Factory reset when released after holding at least (ms)"
+        default 10000
+        help
+            Reset is executed on RELEASE (not while held): a software reset with GPIO9 still LOW
+            could latch the download boot mode.
+
+    config CS_LED_GPIO
+        int "Status LED GPIO (-1 = no LED)"
+        range -1 27
+        default 11
+
+    config CS_LED_ACTIVE_LEVEL
+        int "Level that turns the LED on"
+        range 0 1
+        default 1
+
+    config CS_LED_FLASH_MS
+        int "Duration of one LED flash (ms)"
+        range 5 1000
+        default 30
+
+    config CS_LED_ON_CONTACT_EVENT
+        bool "Flash the LED on every OPEN/CLOSED change"
+        default n
+        help
+            Disabled by default: in normal operation the LED is completely OFF and only
+            used for commissioning, identify and factory reset.
+
+    config CS_VBAT_ADC_GPIO
+        int "Battery divider ADC GPIO (ADC1: GPIO1..GPIO5)"
+        range 1 5
+        default 1
+
+    config CS_VBAT_EN_GPIO
+        int "Battery divider low-side enable GPIO (-1 = divider always connected)"
+        range -1 27
+        default 22
+
+    config CS_VBAT_DIVIDER_RATIO_X1000
+        int "Divider ratio x1000 (Vbat / Vadc)"
+        default 2000
+
+    config CS_VBAT_SETTLE_MS
+        int "Settling time after enabling the divider (ms)"
+        default 40
+        help
+            1 MOhm / 1 MOhm with 10 nF: tau = 5 ms. 40 ms = 8 tau.
+
+    config CS_VBAT_PERIOD_MIN
+        int "Battery measurement period (minutes)"
+        range 10 10080
+        default 720
+
+    config CS_VBAT_WARNING_MV
+        int "BatChargeLevel = Warning below (mV, unloaded)"
+        default 2700
+
+    config CS_VBAT_CRITICAL_MV
+        int "BatChargeLevel = Critical below (mV, unloaded)"
+        default 2500
+
+    config CS_THREAD_TX_POWER_DBM
+        int "IEEE 802.15.4 TX power (dBm)"
+        range -24 20
+        default 10
+        help
+            ESP-IDF initialises every 802.15.4 channel to the maximum power (20 dBm, ~140 mA).
+            Lower power saves battery; the final value must be chosen after RF range tests
+            inside the housing and must not exceed the certified (FCC/CE) power.
+            Applied before the first frame (linker wrap of esp_ieee802154_enable()).
+
+    config CS_UNCOMMISSIONED_DEEP_SLEEP
+        bool "Deep-sleep while not commissioned and no commissioning window is open"
+        default y
+        help
+            esp-matter keeps the BLE controller initialised until the device is commissioned. Its
+            low-power clock keeps the main crystal on in light sleep (no 32 kHz crystal): a few mA
+            instead of ~25 uA. With this option the chip goes to Deep-sleep (~7 uA) once the
+            commissioning window has closed; a button press wakes it and opens a new window.
+
+    config CS_UNCOMMISSIONED_GRACE_S
+        int "Delay between the window closing and Deep-sleep (s)"
+        depends on CS_UNCOMMISSIONED_DEEP_SLEEP
+        range 10 600
+        default 60
+
+    config CS_BOOT_MIN_MV
+        int "Boot guard: minimum battery voltage with the CPU running (mV, 0 = no check)"
+        range 0 3000
+        default 2200
+        help
+            Measured at start-up, before the radio starts. Below this value the cell cannot carry
+            a Thread attach (about 3x the CPU current): the chip goes to Deep-sleep for
+            CS_RECOVERY_SLEEP_S instead of browning out in a loop.
+            Set to 0 on a development kit without the battery divider (floating ADC input).
+
+    config CS_BROWNOUT_LIMIT
+        int "Boot guard: brownout resets in a row before Deep-sleep"
+        range 2 10
+        default 3
+
+    config CS_RECOVERY_SLEEP_S
+        int "Boot guard: Deep-sleep duration before the next try (s)"
+        range 60 86400
+        default 3600
+
+    config CS_COMMISSIONING_WINDOW_SEC
+        int "BLE commissioning window opened by a short press (s)"
+        range 180 900
+        default 300
+
+    config CS_FACTORY_RESET_ON_LAST_FABRIC_REMOVED
+        bool "Factory reset when the last fabric is removed"
+        default y
+        help
+            When the device is removed from the last ecosystem it erases its Thread
+            credentials and restarts BLE advertising so that it can be paired again.
+
+endmenu

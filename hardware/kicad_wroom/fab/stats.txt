@@ -1,0 +1,57 @@
+PCB statistics report
+=====================
+- Date: Wed Nov 11 08:08:40 2026
+- Project: matter_contact_sensor_wroom
+- Board name: matter_contact_sensor_wroom
+
+Board
+-----
+- Width: 32.0000 mm
+- Height: 20.0000 mm
+- Area: 639.784 mm²
+- Front copper area: 522.471 mm²
+- Back copper area: 564.619 mm²
+- Min track clearance: 0.1718 mm
+- Min track width: 0.1500 mm
+- Min drill diameter: 0.3000 mm
+- Board stackup thickness: 1.0000 mm
+
+- Front footprint area: 547.322 mm²
+- Back footprint area: 42.881 mm²
+- Front component density: 85.55 %
+- Back component density: 6.70 %
+Pads
+----
+- Through hole: 5
+- SMD: 116
+- Connector: 0
+- NPTH: 2
+- Castellated: 0
+- Press-fit: 0
+
+Vias
+----
+- Through vias: 121
+- Blind vias: 0
+- Buried vias: 0
+- Micro vias: 0
+
+Components
+----------
+
+|              | Front Side | Back Side | Total |
+|--------------|------------|-----------|-------|
+|THT:          |          1 |         0 |     1 |
+|SMD:          |         30 |         0 |    30 |
+|Unspecified:  |          2 |        10 |    12 |
+|Total:        |         33 |        10 |    43 |
+
+Drill holes
+-----------
+
+| Count | Shape |    X Size |    Y Size | Plated | Via/Pad | Start Layer | Stop Layer |
+|-------|-------|-----------|-----------|--------|---------|-------------|------------|
+|   121 | Round | 0.3000 mm | 0.3000 mm |    PTH |     Via |        F.Cu |       B.Cu |
+|     3 | Round | 0.3000 mm | 0.3000 mm |    PTH |     Pad |        F.Cu |       B.Cu |
+|     2 | Round | 1.5000 mm | 1.5000 mm |   NPTH |     Pad |        F.Cu |       B.Cu |
+|     2 | Round | 0.7000 mm | 0.7000 mm |    PTH |     Pad |        F.Cu |       B.Cu |
