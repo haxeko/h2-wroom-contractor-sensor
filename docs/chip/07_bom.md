@@ -36,7 +36,7 @@ Quy ước cột "Lắp": **Mandatory** = bắt buộc; **Recommended** = khuy�
 | 26 | R8, R9 | 2 | 1 MOhm 1 % 0402 | Yageo | `RC0402FR-071ML` | Mandatory | any 1 % | 0.002 |
 | 27 | R6, R12 | 2 | 1 kOhm 1 % 0402 | Yageo | `RC0402FR-071KL` | Mandatory | any | 0.002 |
 | 28 | R7 | 1 | 10 kOhm 1 % 0402 (RC reset fallback) | Yageo | `RC0402FR-0710KL` | DNP | any | 0.002 |
-| 29 | R13 | 1 | 510 Ohm 5 % 0402 (U0TXD series, 470-560 Ohm) | Yageo | `RC0402JR-07510RL` | Mandatory | any | 0.002 |
+| 29 | R13 | 1 | 499 Ohm 1 % 0402 (U0TXD series, 470-560 Ohm) | Yageo | `RC0402FR-07499RL` | Mandatory | any | 0.002 |
 | 31 | D1 | 1 | LED red 630 nm 0603, Vf 1.75 V @ 2 mA | Kingbright | `APTD1608LSURCK` | Mandatory | Kingbright APHD1608LSURCK | 0.03-0.08 |
 | 32 | SW1 | 1 | Tactile switch SPST-NO 3.0 x 2.5 mm, top actuated, 153 gf | Omron | `B3U-1000P` | Mandatory | B3U-1000P-B (with boss); side actuated B3U-3000P (verify) | 0.15-0.30 |
 | 33 | BT1 (trong vỏ) | 1+1 | CR123A contacts OFF the PCB, in the housing battery compartment: + button contact 1087-1, - coil spring 1087-2 (L outside = 39.8 mm for 2/3A cells); housing slots hold the plates; 2 wires 0.15 mm² (26 AWG), ≤ 60 mm, red/black, soldered from the contact tails to J1 (+ = square pad 1) | Keystone | `1087-1 + 1087-2` | Mandatory | Keystone 1017-1 (leaf) for the - end; SMT pairs need >= 43 mm (Keystone 254 x2) - Keystone 1128 holder is 18.3 mm wide / 52.3 mm long: does not fit | 0.15-0.40 (pair) |
@@ -88,7 +88,7 @@ Giá trong bảng là **ước lượng theo mức giá phân phối phổ biế
 | Hai board dùng chung mọi linh kiện ngoài U1 | R2/R3 (30.1 kΩ / 0 Ω), pin, tiếp điểm pin, firmware giống nhau: gom đơn, một file build |
 | Q1 → **AO3401A** | rẻ hơn, có sẵn ở mọi nơi; cùng chân với DMG2305UX-7 |
 | D2/D3 → **PESD5V0U1BL,315** | mã cũ PESD3V3S1BL khó mua lẻ |
-| R13 499 Ω (E96) → **510 Ω** (E24) | giá trị phổ thông |
+| R13 499 Ω (E96) → 510 Ω (E24) → **499 Ω 1 %** (2026-11-26) | quay lại giá trị theo tài liệu Espressif; 470–560 Ω đều được, 510 Ω vẫn dùng thay được |
 | Thêm mã LCSC cho Q1, U2 trong `fab/assembly/*-bom.csv` | trùng mã với BOM bản nút bấm |
 
 Có thể làm tiếp, **sau khi thử trên mẫu** (chưa áp dụng):

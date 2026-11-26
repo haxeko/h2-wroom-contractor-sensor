@@ -38,7 +38,7 @@ Bản thứ hai của cảm biến cửa, song song với bản dùng chip ESP32
 | Hall | GPIO10 | 5 | HALL_OUT |
 | LED | GPIO11 | 6 | LED_DRV → R12 → D1 |
 | Bật phân áp pin | GPIO22 | 15 | VBAT_EN |
-| UART0 | GPIO23 / GPIO24 | 21 / 22 | U0RXD / U0TXD_CHIP → R13 510 Ω |
+| UART0 | GPIO23 / GPIO24 | 21 / 22 | U0RXD / U0TXD_CHIP → R13 499 Ω |
 | Reset | EN | 2 | CHIP_EN ← R6 ← TPS3839 |
 
 Chân không dùng (IO0, IO2–IO5, IO12–IO14, IO25–IO27, NC 16–19, VBAT) có cờ no-connect. Thạch anh 32.768 kHz tùy chọn của bản chip (Y2) **không** đưa vào bản module (có thể nối vào IO13/IO14 = chân 11/12 nếu cần).

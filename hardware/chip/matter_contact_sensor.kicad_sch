@@ -5730,7 +5730,7 @@
 			(do_not_autoplace no)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "510R"
+		(property "Value" "499R"
 			(at 124.46 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5757,7 +5757,7 @@
 			(hide yes)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "MPN" "RC0402JR-07510RL"
+		(property "MPN" "RC0402FR-07499RL"
 			(at 121.92 243.84 0)
 			(show_name no)
 			(do_not_autoplace no)

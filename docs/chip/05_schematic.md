@@ -62,7 +62,7 @@ Ký hiệu net nguồn: `VBAT_RAW` (cực + pin, trước PMOS), `VBAT` (sau PMO
 | 20 | VDDPST2 | 3V2 | C10 0.1 µF |
 | 21 | GPIO22 | VBAT_EN | R9 |
 | 22 | U0RXD / GPIO23 | U0RXD | TP8 |
-| 23 | U0TXD / GPIO24 | U0TXD_CHIP | R13 510 Ω → U0TXD (TP7) |
+| 23 | U0TXD / GPIO24 | U0TXD_CHIP | R13 499 Ω → U0TXD (TP7) |
 | 24 | GPIO25 (strap JTAG) | NC | — (bỏ qua khi eFuse mặc định) |
 | 25 | GPIO26 / USB_D– | NC | — (rev A: không đưa ra, xem ghi chú dưới bảng GPIO) |
 | 26 | GPIO27 / USB_D+ | NC | — |
@@ -84,13 +84,13 @@ Ký hiệu net nguồn: `VBAT_RAW` (cực + pin, trước PMOS), `VBAT` (sau PMO
                    │
                   SW1 Omron B3U-1000P ── GND    (KHÔNG đặt tụ lên GPIO9 – Espressif)
 
- GPIO24 U0TXD ── R13 510 Ω ── TP7 (TXD)          GPIO23 U0RXD ── TP8 (RXD)
+ GPIO24 U0TXD ── R13 499 Ω ── TP7 (TXD)          GPIO23 U0RXD ── TP8 (RXD)
 ```
 
 - **Boot thường**: GPIO9 = 1 (R10 + pull-up nội), GPIO8 = 1 (R11) ⇒ SPI Boot.
 - **Vào chế độ nạp (Joint Download Boot)**: giữ GPIO9 = 0 (nhấn SW1 hoặc jig kéo TP5 xuống GND) khi reset/cấp nguồn; GPIO8 = 1 nhờ R11 (bắt buộc – mặc định GPIO8 *floating*). Nạp qua UART0 (TP7/TP8) bằng `esptool`/Flash Download Tool (USB-Serial-JTAG không đưa ra ở rev A, xem cuối §10).
 - **Reset**: jig kéo TP4 (CHIP_EN) xuống GND – R6 giới hạn dòng đánh nhau với đầu ra push-pull của U4.
-- R13 510 Ω trên U0TXD theo khuyến nghị Espressif (triệt hài; 470–560 Ω đều được).
+- R13 499 Ω trên U0TXD theo khuyến nghị Espressif (triệt hài; 470–560 Ω đều được, kể cả 510 Ω).
 
 ## 4. Thạch anh
 

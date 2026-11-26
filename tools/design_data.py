@@ -126,7 +126,7 @@ PARTS = [
     Part("D3", "Device:D_TVS", "Diode_SMD:D_SOD-882", "PESD5V0U1BL", {"1": "BTN", "2": "GND"}, "reset",
          "PESD5V0U1BL,315", "Nexperia", dnp=True, description="ESD on button (optional)"),
     R("R11", "100k", "3V2", "IO8_STRAP", "reset", "RC0402FR-07100KL", desc="GPIO8 strap pull-up (download mode)"),
-    R("R13", "510R", "U0TXD_CHIP", "U0TXD", "reset", "RC0402JR-07510RL", desc="U0TXD harmonic suppression"),
+    R("R13", "499R", "U0TXD_CHIP", "U0TXD", "reset", "RC0402FR-07499RL", desc="U0TXD harmonic suppression"),
     # ------------------------------------------------------------------ clocks
     L("L3", "24n", "XTAL_P", "XTAL_P_X", "xtal", L0402, "LQW15AN24NG00D"),
     Part("Y1", "Device:Crystal_GND24", "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm", "32MHz 10ppm CL10pF",

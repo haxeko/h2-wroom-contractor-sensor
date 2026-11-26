@@ -4467,7 +4467,7 @@
 				)
 			)
 		)
-		(property "Value" "510R"
+		(property "Value" "499R"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "a128b0f1-c7d9-4ba2-881a-4ac5a48ab3ad")
@@ -4512,7 +4512,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402JR-07510RL"
+		(property "MPN" "RC0402FR-07499RL"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
